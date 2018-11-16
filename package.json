@@ -27,6 +27,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "babel-preset-airbnb": "^3.0.1"
+    "babel-preset-airbnb": "^3.0.1",
+    "ramda": "^0.25.0"
   }
 }
