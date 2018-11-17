@@ -20,8 +20,8 @@ export const fetchHousesFailure = error => ({
 });
 
 const initialState = {
-  items: [],
-  vendors: [],
+  items: {},
+  vendors: {},
   loading: false,
   error: null,
 };
@@ -32,6 +32,7 @@ export const formatVendor = R.map(
   R.applySpec({
     name: R.compose(R.path(['vendor_verbose', 'display_name']), R.head),
     logo: R.compose(R.path(['vendor_verbose', 'logo']), R.head),
+    id: R.compose(R.path(['vendor_verbose', 'id']), R.head),
     items: a => a,
   }),
 );
@@ -53,7 +54,8 @@ export const Houses = (state = initialState, action) => {
 
   const onFailure = ({ payload }) => ({
     ...state,
-    items: [],
+    items: {},
+    vendors: {},
     loading: false,
     error: payload,
   });

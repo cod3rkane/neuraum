@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { fetchHousesBegin } from '../store/Houses';
+import { VendorList } from '../components/Vendor/VendorList';
 
 class HouseContainer extends React.Component {
   componentDidMount() {
@@ -19,7 +20,7 @@ class HouseContainer extends React.Component {
 
     return (
       <main>
-        Olá
+        <VendorList items={Houses.vendors || {}} />
       </main>
     );
   }
