@@ -6,8 +6,7 @@ const { Meta } = Card;
 export const Vendor = ({ title, avatar, id, children}) => {
   return (
     <div className="vendor">
-      <Card>
-        <Meta avatar={<Avatar src={avatar} />} title={title} description={`Vendor ID: ${id}`}/>
+      <Card title={<Meta avatar={<Avatar src={avatar} />} title={title} description={`Vendor ID: ${id}`}/>}>
         {children}
       </Card>
     </div>
