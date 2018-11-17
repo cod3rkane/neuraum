@@ -71,10 +71,17 @@ export const Houses = (state = initialState, action) => {
 
   const getIndex = R.compose(R.findIndex, R.equals);
 
-  const onUpdateSort = ({ payload }) => ({
-    ...state,
-    sortBy: R.update(getIndex(payload.remove)(state.sortBy), payload.selected, state.sortBy),
-  });
+  const onUpdateSort = ({ payload }) => {
+    const sortBy = R.update(getIndex(payload.remove)(state.sortBy), payload.selected, state.sortBy);
+    const byAsc = R.sort(R.ascend(R.prop(payload.selected)));
+    const vendors = R.map(vendor => ({ ...vendor, items: byAsc(vendor.items) }), state.vendors);
+    
+    return {
+      ...state,
+      sortBy,
+      vendors,
+    };
+  };
 
   return R.cond([
     [typeEq(FETCH_HOUSES_BEGIN), onBegin],
