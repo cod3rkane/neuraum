@@ -9,6 +9,14 @@ class HouseContainer extends React.Component {
   }
 
   render() {
+    const { Houses } = this.props;
+
+    if (Houses.loading) {
+      return (
+        <span>Loading...</span>
+      );
+    }
+
     return (
       <main>
         Olá
