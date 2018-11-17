@@ -3,6 +3,7 @@ import * as R from 'ramda';
 export const FETCH_HOUSES_BEGIN = 'FETCH_HOUSES_BEGIN';
 export const FETCH_HOUSES_SUCCESS = 'FETCH_HOUSES_SUCCESS';
 export const FETCH_HOUSES_FAILURE = 'FETCH_HOUSES_FAILURE';
+export const UPDATE_SORTBY = 'UPDATE_SORTBY';
 
 // Actions
 export const fetchHousesBegin = () => ({
@@ -19,11 +20,17 @@ export const fetchHousesFailure = error => ({
   payload: error,
 });
 
+export const updateSortBy = ({ selected,  oldest }) => ({
+  type: UPDATE_SORTBY,
+  payload: { selected, remove: oldest },
+});
+
 const initialState = {
   items: {},
   vendors: {},
   loading: false,
   error: null,
+  sortBy: ['name', 'price', 'internal_id'],
 };
 
 // House utils
@@ -62,10 +69,18 @@ export const Houses = (state = initialState, action) => {
 
   const typeEq = R.propEq('type');
 
+  const getIndex = R.compose(R.findIndex, R.equals);
+
+  const onUpdateSort = ({ payload }) => ({
+    ...state,
+    sortBy: R.update(getIndex(payload.remove)(state.sortBy), payload.selected, state.sortBy),
+  });
+
   return R.cond([
     [typeEq(FETCH_HOUSES_BEGIN), onBegin],
     [typeEq(FETCH_HOUSES_SUCCESS), onSuccess],
     [typeEq(FETCH_HOUSES_FAILURE), onFailure],
+    [typeEq(UPDATE_SORTBY), onUpdateSort],
     [R.T, R.always(state)]
   ])(action);
 };

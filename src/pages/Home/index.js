@@ -7,9 +7,8 @@ import './Home.scss';
 export const Home = () => {
   return (
     <div id="home">
-        <header>header</header>
-        <HouseContainer />
-      </div>
+      <HouseContainer />
+    </div>
   );
 };
 

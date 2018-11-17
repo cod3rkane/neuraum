@@ -1,0 +1,14 @@
+.panel {
+  display: flex;
+  justify-content: end;
+  align-items: first baseline;
+  margin: 18px;
+
+  h4 {
+    margin-right: 12px;
+  }
+
+  div {
+    margin-right: 6px;
+  }
+}
