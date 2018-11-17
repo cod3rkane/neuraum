@@ -5,12 +5,12 @@ import * as R from 'ramda';
 import { Vendor } from './index';
 import { HouseList } from '../House/HouseList';
 
-export const VendorList = ({ items }) => {
+export const VendorList = ({ items, onPriceChange }) => {
   const mapVendors = R.compose(
     R.values,
     R.map(({ id, logo, name, items: houses }) => (
       <Vendor key={id} title={name} id={id} avatar={logo.original}>
-        <HouseList items={houses} />
+        <HouseList items={houses} onPriceChange={onPriceChange} />
       </Vendor>
     ))
   );
@@ -19,5 +19,6 @@ export const VendorList = ({ items }) => {
 };
 
 VendorList.propTypes = {
-  items: PropTypes.object.isRequired
+  items: PropTypes.object.isRequired,
+  onPriceChange: PropTypes.func.isRequired,
 };

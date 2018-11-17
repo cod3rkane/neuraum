@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Table, Avatar } from 'antd';
+import { Table, Avatar, Input } from 'antd';
 import * as R from 'ramda';
 
 const withSorter = WrappedComponent => {
@@ -54,7 +54,55 @@ const withSorter = WrappedComponent => {
   };
 };
 
-export const HouseList = ({ items }) => {
+class EditablePrice extends React.Component {
+  state = {
+    editing: false,
+    text: '',
+  };
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleClickOutside, true);
+  }
+
+  render() {
+    const { value } = this.props;
+    const { editing } = this.state;
+    const formatedValue = value.toLocaleString('US', { style: 'currency', currency: 'EUR' });
+    const plainText = <div onClick={this.onClickEdit}>{formatedValue}</div>;
+
+    return (
+      <div ref={node => (this.cell = node)}>
+        {editing ? <Input defaultValue={value} onChange={this.onChange}/> : plainText}
+      </div>
+    );
+  };
+
+  onClickEdit = () => {
+    this.setState({ editing: true });
+    document.addEventListener('click', this.handleClickOutside, true);
+  }
+
+  handleClickOutside = (e) => {
+    const { editing } = this.state;
+    if (editing && this.cell !== e.target && !this.cell.contains(e.target)) {
+      this.setState({ editing: false });
+      document.removeEventListener('click', this.handleClickOutside, true);
+      if (this.state.text.toString() !== '') {
+        this.props.onChange(this.state.text);
+      }
+    }
+  }
+
+  onChange = (e) => this.setState({ text: e.target.value });
+
+};
+
+EditablePrice.propTypes = {
+  value: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
+export const HouseList = ({ items, onPriceChange }) => {
   const columns = [
     {
       title: 'House ID',
@@ -75,8 +123,7 @@ export const HouseList = ({ items }) => {
     {
       title: 'Price',
       dataIndex: 'price',
-      render: price =>
-        price.toLocaleString('US', { style: 'currency', currency: 'EUR' }),
+      render: (price, record) => <EditablePrice value={price} onChange={(newPrice) => onPriceChange({ newPrice, record })} />,
       sorter: true,
     },
     {
@@ -101,5 +148,6 @@ export const HouseList = ({ items }) => {
 };
 
 HouseList.propTypes = {
-  items: PropTypes.array.isRequired
+  items: PropTypes.array.isRequired,
+  onPriceChange: PropTypes.func.isRequired,
 };

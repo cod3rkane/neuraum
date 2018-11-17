@@ -65,5 +65,5 @@ export const Panel = ({ sortBy, onChange }) => {
 
 Panel.propTypes = {
   sortBy: PropTypes.array.isRequired,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };

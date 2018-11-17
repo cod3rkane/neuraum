@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { fetchHousesBegin, updateSortBy } from '../store/Houses';
+import { fetchHousesBegin, updateSortBy, updateHousePrice } from '../store/Houses';
 import { VendorList } from '../components/Vendor/VendorList';
 import { Panel } from '../components/Panel';
 
@@ -11,7 +11,7 @@ class HouseContainer extends React.Component {
   }
 
   render() {
-    const { Houses } = this.props;
+    const { Houses, onPriceChange, onChangePanel } = this.props;
 
     if (Houses.loading) {
       return (
@@ -21,8 +21,8 @@ class HouseContainer extends React.Component {
 
     return (
       <main>
-        <Panel sortBy={Houses.sortBy} onChange={this.props.onChangePanel}/>
-        <VendorList items={Houses.vendors || {}} />
+        <Panel sortBy={Houses.sortBy} onChange={onChangePanel}/>
+        <VendorList items={Houses.vendors || {}} onPriceChange={onPriceChange}/>
       </main>
     );
   }
@@ -41,6 +41,9 @@ const mapDispatchToProps = dispatch => ({
         oldest
       })
     );
+  },
+  onPriceChange({ newPrice, record }) {
+    dispatch(updateHousePrice({ price: newPrice, house: record }));
   },
 });
 
