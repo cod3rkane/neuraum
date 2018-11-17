@@ -1,9 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Button } from 'antd';
 
 import { fetchHousesBegin, updateSortBy, updateHousePrice } from '../store/Houses';
 import { VendorList } from '../components/Vendor/VendorList';
 import { Panel } from '../components/Panel';
+
+import './House.scss';
 
 class HouseContainer extends React.Component {
   componentDidMount() {
@@ -20,9 +23,12 @@ class HouseContainer extends React.Component {
     }
 
     return (
-      <main>
+      <main className="house-main">
         <Panel sortBy={Houses.sortBy} onChange={onChangePanel}/>
         <VendorList items={Houses.vendors || {}} onPriceChange={onPriceChange}/>
+        <div className="buttons">
+          <Button type="primary" onClick={() => console.log(JSON.stringify(Houses.edited))}>Save</Button>
+        </div>
       </main>
     );
   }

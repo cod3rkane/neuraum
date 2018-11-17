@@ -95,13 +95,14 @@ export const Houses = (state = initialState, action) => {
     const updatePrice = R.assoc('price', parseFloat(payload.price))
     const itemIndex = R.findIndex(R.propEq('internal_id', payload.house.internal_id), state.items)
     const newHouse = updatePrice(findItemByInternalId(state.items));
-    const newVendors = R.update(itemIndex, newHouse, state.items)
+    const items = R.update(itemIndex, newHouse, state.items)
     const edited = { price: payload.price,  id: payload.house.internal_id, vendor: payload.house.vendor_verbose.id };
 
     return {
       ...state,
-      vendors: R.compose(formatVendor, groupByVendor)(newVendors),
-      edited: { ...state.edited, [payload.house.internal_id]:edited  },
+      items,
+      vendors: R.compose(formatVendor, groupByVendor)(items),
+      edited: { ...state.edited, [payload.house.internal_id]: edited  },
     };
   };
 

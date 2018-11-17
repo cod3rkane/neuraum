@@ -87,7 +87,7 @@ class EditablePrice extends React.Component {
     if (editing && this.cell !== e.target && !this.cell.contains(e.target)) {
       this.setState({ editing: false });
       document.removeEventListener('click', this.handleClickOutside, true);
-      if (this.state.text.toString() !== '') {
+      if (!isNaN(parseFloat(this.state.text)) && R.is(Number, parseFloat(this.state.text))) {
         this.props.onChange(this.state.text);
       }
     }
