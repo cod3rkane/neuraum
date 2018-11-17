@@ -1,17 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 import 'antd/dist/antd.css';
 
 import { Routes } from './Routes';
 import * as serviceWorker from './serviceWorker';
+import Store from './store/Store';
 
 import './assets/css/index.scss';
 
 ReactDOM.render(
   <BrowserRouter>
-    <Routes />
+    <Provider store={Store}>
+      <Routes />
+    </Provider>
   </BrowserRouter>,
   document.getElementById('root')
 );
