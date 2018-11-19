@@ -12,7 +12,9 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
     "redux": "^4.0.1",
-    "redux-saga": "^0.16.2"
+    "redux-saga": "^0.16.2",
+    "ramda": "^0.25.0",
+    "redux-devtools": "^3.4.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,8 +32,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "babel-preset-airbnb": "^3.0.1",
-    "ramda": "^0.25.0",
-    "redux-devtools": "^3.4.2"
+    "babel-preset-airbnb": "^3.0.1"
   }
 }
