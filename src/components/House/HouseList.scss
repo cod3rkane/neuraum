@@ -3,7 +3,6 @@
     table {
       display: flex;
       flex-direction: row;
-      overflow: auto;
 
       thead {
         width: 30%;
@@ -19,11 +18,13 @@
 
       tbody {
         display: flex;
+        overflow: auto;
 
         tr {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
+          min-width: 100%;
 
           td {
             max-height: 54px;
