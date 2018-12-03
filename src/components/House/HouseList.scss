@@ -1,33 +1,70 @@
 .house-list {
   .ant-table-body {
-    table {
-      display: flex;
-      flex-direction: row;
-
-      thead {
-        width: 30%;
-        flex-basis: 30%;
-        word-wrap: break-word;
-
-        tr {
+    &.normal {
+      table {
+        display: flex;
+        flex-direction: row;
+  
+        thead {
+          width: 30%;
+          flex-basis: 30%;
+          word-wrap: break-word;
+  
+          tr {
+            display: flex;
+            flex-direction: column;
+            min-width: 106px;
+          }
+        }
+  
+        tbody {
           display: flex;
-          flex-direction: column;
-          min-width: 106px;
+          overflow: auto;
+  
+          tr {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-width: 100%;
+  
+            td {
+              max-height: 54px;
+            }
+          }
         }
       }
+    }
 
-      tbody {
+    &.version2 {
+      table {
         display: flex;
-        overflow: auto;
+        flex-direction: row;
 
-        tr {
+        thead {
+          display: none;
+        }
+  
+        tbody {
           display: flex;
+          overflow: auto;
           flex-direction: column;
-          justify-content: space-between;
-          min-width: 100%;
+          flex-basis: 100%;
+  
+          tr {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-width: 100%;
+            margin: 12px 0;
+            border-radius: 4px;
 
-          td {
-            max-height: 54px;
+            &:nth-of-type(odd) {
+              background-color: #c5e6f6;
+            }
+  
+            td {
+              max-height: 54px;
+            }
           }
         }
       }
