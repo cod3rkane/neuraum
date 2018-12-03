@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Table, Avatar, Input } from 'antd';
 import * as R from 'ramda';
 
+import './HouseList.scss';
+
 const withSorter = WrappedComponent => {
   return class extends React.Component {
     state = {
@@ -142,7 +144,7 @@ export const HouseList = ({ items, onPriceChange }) => {
 
   return (
     <Fragment>
-      <TableWithSorter columns={columns} dataSource={items} rowKey="id" />
+      <TableWithSorter columns={columns} dataSource={items}  rowKey="id" className="house-list"/>
     </Fragment>
   );
 };

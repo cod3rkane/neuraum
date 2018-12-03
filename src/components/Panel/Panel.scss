@@ -1,8 +1,13 @@
+@import '../../assets/css/util/breakpoints.scss';
+
 .panel {
-  display: flex;
   justify-content: end;
   align-items: first baseline;
   margin: 18px;
+
+  @include breakpoint(sm) {
+    display: flex;
+  }
 
   h4 {
     margin-right: 12px;
