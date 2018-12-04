@@ -104,7 +104,7 @@ EditablePrice.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-export const HouseList = ({ items, onPriceChange }) => {
+export const HouseList = ({ items, onPriceChange, index }) => {
   const columns = [
     {
       title: 'House ID',
@@ -141,10 +141,11 @@ export const HouseList = ({ items, onPriceChange }) => {
   ];
 
   const TableWithSorter = withSorter(Table);
+  const tableClass = index % 2 === 0 ? 'normal' : 'version2';
 
   return (
     <Fragment>
-      <TableWithSorter columns={columns} dataSource={items}  rowKey="id" className="house-list"/>
+      <TableWithSorter columns={columns} dataSource={items}  rowKey="id" className={`house-list ${tableClass}`}/>
     </Fragment>
   );
 };
@@ -152,4 +153,5 @@ export const HouseList = ({ items, onPriceChange }) => {
 HouseList.propTypes = {
   items: PropTypes.array.isRequired,
   onPriceChange: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
 };

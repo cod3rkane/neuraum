@@ -1,8 +1,14 @@
+@import '../assets/css/util/breakpoints.scss';
+
 .house-main {
+  @include breakpoint(lg) {
+    max-width: 82%;
+    margin: 0 auto;
+  }
 
  .buttons {
    margin: 18px;
    display: flex;
-  justify-content: end;
+  justify-content: flex-end;
  } 
 }

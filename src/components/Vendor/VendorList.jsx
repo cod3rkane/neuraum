@@ -10,7 +10,7 @@ export const VendorList = ({ items, onPriceChange }) => {
     R.values,
     R.map(({ id, logo, name, items: houses }) => (
       <Vendor key={id} title={name} id={id} avatar={logo.original}>
-        <HouseList items={houses} onPriceChange={onPriceChange} />
+        <HouseList index={id} items={houses} onPriceChange={onPriceChange} />
       </Vendor>
     ))
   );

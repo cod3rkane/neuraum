@@ -1,32 +1,57 @@
+@import '../../assets/css/util/breakpoints.scss';
+
 .house-list {
-  .ant-table-body {
-    &.normal {
+  &.normal {
+    .ant-table-body {
       table {
         display: flex;
         flex-direction: row;
-  
+
+        @include breakpoint(sm) {
+          display: table;
+        }
+
         thead {
-          width: 30%;
-          flex-basis: 30%;
+          // width: 30%;
+          flex-basis: 10%;
           word-wrap: break-word;
-  
+
+          @include breakpoint(sm) {
+            width: inherit;
+            flex-basis: 0;
+          }
+
           tr {
             display: flex;
             flex-direction: column;
             min-width: 106px;
+
+            @include breakpoint(sm) {
+              display: table-row;
+              min-width: auto;
+            }
           }
         }
-  
+
         tbody {
           display: flex;
-          overflow: auto;
-  
+          overflow-y: hidden;
+          flex-basis: 90%;
+
+          @include breakpoint(sm) {
+            display: table-row-group;
+          }
+
           tr {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             min-width: 100%;
-  
+
+            @include breakpoint(sm) {
+              display: table-row;
+            }
+
             td {
               max-height: 54px;
             }
@@ -34,22 +59,36 @@
         }
       }
     }
+  }
 
-    &.version2 {
+  &.version2 {
+    .ant-table-body {
       table {
         display: flex;
         flex-direction: row;
 
+        @include breakpoint(sm) {
+          display: table;
+        }
+
         thead {
           display: none;
+
+          @include breakpoint(sm) {
+            display: table-header-group;
+          }
         }
-  
+
         tbody {
           display: flex;
           overflow: auto;
           flex-direction: column;
           flex-basis: 100%;
-  
+
+          @include breakpoint(sm) {
+            display: table-row-group;
+          }
+
           tr {
             display: flex;
             flex-direction: column;
@@ -58,10 +97,14 @@
             margin: 12px 0;
             border-radius: 4px;
 
+            @include breakpoint(sm) {
+              display: table-row;
+            }
+
             &:nth-of-type(odd) {
               background-color: #c5e6f6;
             }
-  
+
             td {
               max-height: 54px;
             }

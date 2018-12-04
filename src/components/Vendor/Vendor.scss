@@ -1,5 +1,13 @@
+@import '../../assets/css/util/breakpoints.scss';
+
 .vendor {
+  margin: 18px 0;
+
   .ant-card-body {
     padding: 0;
+
+    @include breakpoint(sm) {
+      padding: 24px 32px;
+    }
   }
 }
